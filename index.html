@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>مولد كلمات المرور القوية - آمن ومحمي</title>
+<style>
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+}
+body {
+font-family: 'Arial', sans-serif;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+min-height: 100vh;
+display: flex;
+align-items: center;
+justify-content: center;
+padding: 20px;
+}
+.container {
+background: rgba(255, 255, 255, 0.95);
+border-radius: 20px;
+box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+padding: 40px;
+max-width: 500px;
+width: 100%;
+backdrop-filter: blur(10px);
+}
+h1 {
+text-align: center;
+color: #333;
+margin-bottom: 30px;
+font-size: 28px;
+}
+.option-group {
+margin-bottom: 25px;
+}
+.option-group h3 {
+color: #555;
+margin-bottom: 15px;
+font-size: 18px;
+}
+.slider-container {
+display: flex;
+align-items: center;
+gap: 15px;
+}
+.slider {
+flex: 1;
+height: 6px;
+border-radius: 5px;
+background: #ddd;
+outline: none;
+-webkit-appearance: none;
+}
+.slider::-webkit-slider-thumb {
+-webkit-appearance: none;
+appearance: none;
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #667eea;
+cursor: pointer;
+}
+.slider::-moz-range-thumb {
+width: 20px;
+height: 20px;
+border-radius: 50%;
+background: #667eea;
+cursor: pointer;
+border: none;
+}
+.length-value {
+background: #667eea;
+color: white;
+padding: 5px 12px;
+border-radius: 15px;
+font-weight: bold;
+min-width: 40px;
+text-align: center;
+}
+.checkbox-container {
+display: flex;
+flex-wrap: wrap;
+gap: 15px;
+}
+.checkbox-item {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.checkbox-item input[type="checkbox"] {
+width: 20px;
+height: 20px;
+accent-color: #667eea;
+}
+.checkbox-item label {
+color: #555;
+cursor: pointer;
+font-size: 16px;
+}
+.generate-btn {
+width: 100%;
+padding: 15px;
+background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+color: white;
+border: none;
+border-radius: 12px;
+font-size: 18px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s ease;
+margin: 30px 0 20px 0;
+}
+.generate-btn:hover {
+transform: translateY(-2px);
+box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+}
+.password-output {
+background: #f8f9fa;
+border: 2px solid #e9ecef;
+border-radius: 12px;
+padding: 15px;
+font-family: 'Courier New', monospace;
+font-size: 18px;
+text-align: center;
+word-break: break-all;
+min-height: 60px;
+display: flex;
+align-items: center;
+justify-content: center;
+margin-bottom: 15px;
+position: relative;
+}
+.copy-btn {
+background: #28a745;
+color: white;
+border: none;
+padding: 8px 15px;
+border-radius: 8px;
+cursor: pointer;
+font-size: 14px;
+transition: all 0.3s ease;
+}
+.copy-btn:hover {
+background: #218838;
+}
+.strength-meter {
+margin: 15px 0;
+}
+.strength-bar {
+height: 8px;
+background: #e9ecef;
+border-radius: 4px;
+overflow: hidden;
+}
+.strength-fill {
+height: 100%;
+border-radius: 4px;
+transition: all 0.3s ease;
+width: 0%;
+}
+.strength-text {
+text-align: center;
+margin-top: 8px;
+font-weight: bold;
+}
+.weak { background: #dc3545; }
+.medium { background: #ffc107; }
+.strong { background: #28a745; }
+.tips {
+background: #e3f2fd;
+border: 1px solid #bbdefb;
+border-radius: 8px;
+padding: 15px;
+margin-top: 20px;
+}
+.tips h4 {
+color: #1976d2;
+margin-bottom: 10px;
+}
+.tips ul {
+color: #555;
+padding-right: 20px;
+}
+.tips li {
+margin-bottom: 5px;
+}
+.contact-section {
+background: #f8f9fa;
+border: 1px solid #e9ecef;
+border-radius: 8px;
+padding: 20px;
+margin-top: 20px;
+text-align: center;
+}
+.contact-section h4 {
+color: #495057;
+margin-bottom: 15px;
+}
+.contact-info {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-bottom: 10px;
+flex-wrap: wrap;
+}
+.contact-item {
+display: flex;
+align-items: center;
+gap: 8px;
+}
+.contact-icon {
+font-size: 18px;
+}
+.contact-item a {
+color: #667eea;
+text-decoration: none;
+font-weight: 500;
+transition: color 0.3s ease;
+}
+.contact-item a:hover {
+color: #764ba2;
+text-decoration: underline;
+}
+.contact-note {
+color: #6c757d;
+font-size: 14px;
+margin-top: 10px;
+}
+@keyframes pulse {
+0% { transform: scale(1); }
+50% { transform: scale(1.05); }
+100% { transform: scale(1); }
+}
+.copied {
+animation: pulse 0.5s ease;
+background: #d4edda !important;
+border-color: #c3e6cb !important;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🔐 مولد كلمات المرور القوية</h1>
+<div class="option-group">
+<h3>طول كلمة المرور</h3>
+<div class="slider-container">
+<input type="range" id="lengthSlider" class="slider" min="4" max="50" value="12">
+<span class="length-value" id="lengthValue">12</span>
+</div>
+</div>
+<div class="option-group">
+<h3>خيارات الأحرف</h3>
+<div class="checkbox-container">
+<div class="checkbox-item">
+<input type="checkbox" id="lowercase" checked>
+<label for="lowercase">أحرف صغيرة (a-z)</label>
+</div>
+<div class="checkbox-item">
+<input type="checkbox" id="uppercase" checked>
+<label for="uppercase">أحرف كبيرة (A-Z)</label>
+</div>
+<div class="checkbox-item">
+<input type="checkbox" id="numbers" checked>
+<label for="numbers">أرقام (0-9)</label>
+</div>
+<div class="checkbox-item">
+<input type="checkbox" id="symbols" checked>
+<label for="symbols">رموز (!@#$)</label>
+</div>
+</div>
+</div>
+<button class="generate-btn" onclick="generatePassword()">🔄 توليد كلمة مرور جديدة</button>
+<div class="password-output" id="passwordOutput">
+اضغط على الزر لتوليد كلمة المرور
+</div>
+<button class="copy-btn" onclick="copyPassword()" id="copyBtn" style="display: none;">📋 نسخ كلمة المرور</button>
+<div class="strength-meter" id="strengthMeter" style="display: none;">
+<div class="strength-bar">
+<div class="strength-fill" id="strengthFill"></div>
+</div>
+<div class="strength-text" id="strengthText"></div>
+</div>
+<div class="tips">
+<h4>💡 نصائح لكلمة مرور قوية:</h4>
+<ul>
+<li>استخدم على الأقل 12 حرف</li>
+<li>امزج بين الأحرف الكبيرة والصغيرة والأرقام والرموز</li>
+<li>لا تستخدم معلومات شخصية</li>
+<li>استخدم كلمة مرور مختلفة لكل موقع</li>
+<li>احفظ كلمات المرور في مدير كلمات مرور آمن</li>
+</ul>
+</div>
+<div class="contact-section">
+<h4>📞 تواصل معنا</h4>
+<div class="contact-info">
+<div class="contact-item">
+<span class="contact-icon">📧</span>
+<a href="mailto:nerva98134@gmail.com">nerva98134@gmail.com</a>
+</div>
+<div class="contact-item">
+<span class="contact-icon">💻</span>
+<a href="https://github.com/Wr-7770" target="_blank">GitHub Profile</a>
+</div>
+<div class="contact-item">
+<span class="contact-icon">💼</span>
+<a href="https://linkedin.com/in/yousef-mohamed-ahmed-24795435a" target="_blank">LinkedIn Profile</a>
+</div>
+</div>
+<p class="contact-note">لأي استفسارات أو اقتراحات حول المولد</p>
+</div>
+</div>
+<script>
+let currentPassword = '';
+// تحديث قيمة طول كلمة المرور
+document.getElementById('lengthSlider').addEventListener('input', function() {
+document.getElementById('lengthValue').textContent = this.value;
+});
+function generatePassword() {
+// تنظيف المدخلات لمنع XSS
+const length = Math.max(4, Math.min(50, parseInt(document.getElementById('lengthSlider').value) || 12));
+const includeLowercase = Boolean(document.getElementById('lowercase').checked);
+const includeUppercase = Boolean(document.getElementById('uppercase').checked);
+const includeNumbers = Boolean(document.getElementById('numbers').checked);
+const includeSymbols = Boolean(document.getElementById('symbols').checked);
+let charset = '';
+const lowercase = 'abcdefghijklmnopqrstuvwxyz';
+const uppercase = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+const numbers = '0123456789';
+// تحديد رموز آمنة فقط
+const symbols = '!@#$%^&*()_+-=[]{}|;:,.<>?~';
+if (includeLowercase) charset += lowercase;
+if (includeUppercase) charset += uppercase;
+if (includeNumbers) charset += numbers;
+if (includeSymbols) charset += symbols;
+if (charset === '') {
+alert('يرجى اختيار نوع واحد على الأقل من الأحرف!');
+return;
+}
+let password = '';
+// استخدام crypto.getRandomValues للعشوائية الآمنة
+const getRandomInt = (max) => {
+const array = new Uint32Array(1);
+window.crypto.getRandomValues(array);
+return array[0] % max;
+};
+// ضمان وجود حرف واحد على الأقل من كل نوع مختار
+if (includeLowercase) password += lowercase[getRandomInt(lowercase.length)];
+if (includeUppercase) password += uppercase[getRandomInt(uppercase.length)];
+if (includeNumbers) password += numbers[getRandomInt(numbers.length)];
+if (includeSymbols) password += symbols[getRandomInt(symbols.length)];
+// إكمال باقي الطول بأحرف عشوائية آمنة
+for (let i = password.length; i < length; i++) {
+password += charset[getRandomInt(charset.length)];
+}
+// خلط الأحرف بطريقة آمنة
+const passwordArray = password.split('');
+for (let i = passwordArray.length - 1; i > 0; i--) {
+const j = getRandomInt(i + 1);
+[passwordArray[i], passwordArray[j]] = [passwordArray[j], passwordArray[i]];
+}
+password = passwordArray.join('');
+currentPassword = password;
+// تنظيف النص قبل العرض لمنع XSS
+document.getElementById('passwordOutput').textContent = password;
+document.getElementById('copyBtn').style.display = 'block';
+// حساب وعرض قوة كلمة المرور
+calculateStrength(password);
+// مسح كلمة المرور من الذاكرة بعد 5 دقائق لأمان إضافي
+setTimeout(() => {
+if (currentPassword === password) {
+currentPassword = '';
+document.getElementById('passwordOutput').textContent = 'تم مسح كلمة المرور للأمان';
+document.getElementById('copyBtn').style.display = 'none';
+}
+}, 300000); // 5 دقائق
+}
+function calculateStrength(password) {
+let score = 0;
+// طول كلمة المرور
+if (password.length >= 8) score += 1;
+if (password.length >= 12) score += 1;
+if (password.length >= 16) score += 1;
+// تنوع الأحرف
+if (/[a-z]/.test(password)) score += 1;
+if (/[A-Z]/.test(password)) score += 1;
+if (/[0-9]/.test(password)) score += 1;
+if (/[^a-zA-Z0-9]/.test(password)) score += 1;
+const strengthMeter = document.getElementById('strengthMeter');
+const strengthFill = document.getElementById('strengthFill');
+const strengthText = document.getElementById('strengthText');
+strengthMeter.style.display = 'block';
+if (score <= 3) {
+strengthFill.className = 'strength-fill weak';
+strengthFill.style.width = '30%';
+strengthText.textContent = 'ضعيفة ⚠️';
+strengthText.style.color = '#dc3545';
+} else if (score <= 5) {
+strengthFill.className = 'strength-fill medium';
+strengthFill.style.width = '60%';
+strengthText.textContent = 'متوسطة ⚡';
+strengthText.style.color = '#ffc107';
+} else {
+strengthFill.className = 'strength-fill strong';
+strengthFill.style.width = '100%';
+strengthText.textContent = 'قوية جداً ✅';
+strengthText.style.color = '#28a745';
+}
+}
+function copyPassword() {
+if (currentPassword) {
+navigator.clipboard.writeText(currentPassword).then(() => {
+const output = document.getElementById('passwordOutput');
+const copyBtn = document.getElementById('copyBtn');
+output.classList.add('copied');
+copyBtn.textContent = '✅ تم النسخ!';
+setTimeout(() => {
+output.classList.remove('copied');
+copyBtn.textContent = '📋 نسخ كلمة المرور';
+}, 1500);
+}).catch(() => {
+alert('فشل في نسخ كلمة المرور. يمكنك نسخها يدوياً.');
+});
+}
+}
+// توليد كلمة مرور افتراضية عند تحميل الصفحة
+window.onload = function() {
+generatePassword();
+};
+</script>
+</body>
+</html>
