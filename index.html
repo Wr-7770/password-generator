@@ -1,20 +1,23 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="ar" dir="rtl" id="main-html">
 <head>
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6SW5TPXQ59"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag( ){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-6SW5TPXQ59');
-</script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VaultGen - Professional Password & Passphrase Generator. Secure, fast, and private.">
     <title>VaultGen | Professional Password Security</title>
+    
+    <link rel="icon" href="https://wr-7770.github.io/password-generator/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SW5TPXQ59"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6SW5TPXQ59');
+    </script>
+
     <style>
         :root {
             --bg-color: #0a0a0a;
@@ -25,273 +28,69 @@
             --text-secondary: #a1a1aa;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', 'Tajawal', sans-serif;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.2s ease; }
+        body { background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; font-family: 'Inter', 'Tajawal', sans-serif; }
+        .container { width: 100%; max-width: 500px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); position: relative; }
+        
+        .lang-switch { position: absolute; top: 20px; right: 20px; background: #1a1a1a; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; z-index: 10; }
+        .lang-switch:hover { color: #fff; border-color: #444; }
 
-        body {
-            background-color: var(--bg-color );
-            color: var(--text-primary);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
+        header { text-align: center; margin-bottom: 35px; }
+        h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
+        p.subtitle { color: var(--text-secondary); font-size: 0.95rem; }
 
-        .container {
-            width: 100%;
-            max-width: 480px;
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 16px;
-            padding: 40px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
-        }
+        .mode-selector { display: flex; background: #1a1a1a; border: 1px solid var(--border-color); border-radius: 12px; padding: 5px; margin-bottom: 30px; }
+        .mode-btn { flex: 1; padding: 12px; border: none; background: none; color: var(--text-secondary); cursor: pointer; font-weight: 600; border-radius: 8px; }
+        .mode-btn.active { background: #fff; color: #000; }
 
-        header {
-            text-align: center;
-            margin-bottom: 35px;
-        }
+        .result-box { background: #000; border: 1px solid var(--border-color); border-radius: 12px; padding: 22px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
+        #password-display { font-family: 'Courier New', monospace; font-size: 1.4rem; color: var(--text-primary); word-break: break-all; direction: ltr !important; text-align: left; flex: 1; }
 
-        h1 {
-            font-size: 2rem;
-            font-weight: 800;
-            letter-spacing: -1px;
-            margin-bottom: 8px;
-        }
+        .action-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.45rem; }
+        .action-btn:hover { color: #fff; }
 
-        p.subtitle {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
+        .strength-indicator { height: 5px; width: 100%; background: #262626; border-radius: 3px; margin-bottom: 35px; overflow: hidden; }
+        #strength-bar { height: 100%; width: 0%; transition: width 0.5s ease, background-color 0.5s ease; }
 
-        .result-box {
-            background: #000000;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
+        .settings-group { display: flex; flex-direction: column; gap: 30px; }
+        .label-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1rem; color: var(--text-secondary); }
+        
+        input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: #262626; border-radius: 3px; outline: none; }
+        input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: #fff; border-radius: 50%; cursor: pointer; border: 3px solid #000; }
 
-        #password-display {
-            font-family: 'Courier New', monospace;
-            font-size: 1.4rem;
-            color: var(--text-primary);
-            word-break: break-all;
-        }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        .option-item { display: flex; align-items: center; gap: 12px; padding: 15px; background: #1a1a1a; border: 1px solid var(--border-color); border-radius: 12px; cursor: pointer; font-size: 0.9rem; }
 
-        .action-btn {
-            background: none;
-            border: none;
-            color: var(--text-secondary);
-            cursor: pointer;
-            font-size: 1.3rem;
-            transition: color 0.2s;
-            padding: 5px;
-        }
+        .generate-btn { width: 100%; padding: 20px; background: #fff; color: #000; border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-top: 35px; }
+        .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
 
-        .action-btn:hover {
-            color: var(--text-primary);
-        }
+        footer { margin-top: 45px; padding-top: 25px; border-top: 1px solid var(--border-color); text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; }
+        .footer-links a { color: var(--text-secondary); font-size: 1.5rem; }
+        .footer-links a:hover { color: #fff; }
+        .footer-text { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 3px; }
 
-        .strength-indicator {
-            height: 4px;
-            width: 100%;
-            background: #262626;
-            border-radius: 2px;
-            margin-bottom: 35px;
-            overflow: hidden;
-        }
-
-        #strength-bar {
-            height: 100%;
-            width: 0%;
-            transition: width 0.4s ease, background-color 0.4s ease;
-        }
-
-        .settings-group {
-            display: flex;
-            flex-direction: column;
-            gap: 30px;
-        }
-
-        .label-row {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
-        }
-
-        /* تحسين شريط التمرير */
-        input[type="range"] {
-            -webkit-appearance: none;
-            width: 100%;
-            height: 6px;
-            background: #262626;
-            border-radius: 3px;
-            outline: none;
-        }
-
-        input[type="range"]::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            background: var(--accent-color);
-            border-radius: 50%;
-            cursor: pointer;
-            border: 2px solid #000;
-            box-shadow: 0 0 10px rgba(255,255,255,0.2);
-            transition: transform 0.2s;
-        }
-
-        input[type="range"]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-        }
-
-        /* تحسين مربعات الاختيار */
-        .options-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 15px;
-        }
-
-        .option-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 14px;
-            background: #1a1a1a;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.9rem;
-            transition: all 0.2s;
-            position: relative;
-        }
-
-        .option-item:hover {
-            background: #222222;
-            border-color: #444;
-        }
-
-        .option-item input[type="checkbox"] {
-            appearance: none;
-            -webkit-appearance: none;
-            width: 20px;
-            height: 20px;
-            border: 2px solid #444;
-            border-radius: 4px;
-            background: transparent;
-            cursor: pointer;
-            position: relative;
-            transition: all 0.2s;
-        }
-
-        .option-item input[type="checkbox"]:checked {
-            background: var(--accent-color);
-            border-color: var(--accent-color);
-        }
-
-        .option-item input[type="checkbox"]:checked::after {
-            content: '\f00c';
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            color: #000;
-            font-size: 12px;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .generate-btn {
-            width: 100%;
-            padding: 18px;
-            background: var(--accent-color);
-            color: #000000;
-            border: none;
-            border-radius: 10px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 35px;
-            transition: transform 0.2s, opacity 0.2s;
-        }
-
-        .generate-btn:hover {
-            opacity: 0.9;
-            transform: translateY(-2px);
-        }
-
-        footer {
-            margin-top: 45px;
-            padding-top: 25px;
-            border-top: 1px solid var(--border-color);
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 25px;
-            margin-bottom: 15px;
-        }
-
-        .footer-links a {
-            color: var(--text-secondary);
-            font-size: 1.4rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--text-primary);
-        }
-
-        .footer-text {
-            font-size: 0.8rem;
-            color: var(--text-secondary);
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .toast {
-            position: fixed;
-            top: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: #ffffff;
-            color: #000000;
-            padding: 12px 25px;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 700;
-            display: none;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.4);
-            z-index: 1000;
-        }
+        .toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 12px 30px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; display: none; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
 
     <div class="container">
+        <button class="lang-switch" id="lang-btn">English</button>
+        
         <header>
-            <h1>VaultGen</h1>
-            <p class="subtitle">توليد كلمات مرور بمعايير أمنية عالمية</p>
+            <h1 id="title">VaultGen</h1>
+            <p class="subtitle" id="subtitle">توليد كلمات مرور بمعايير أمنية عالمية</p>
         </header>
+
+        <div class="mode-selector">
+            <button class="mode-btn active" id="mode-password">Password</button>
+            <button class="mode-btn" id="mode-passphrase">Passphrase</button>
+        </div>
 
         <div class="result-box">
             <div id="password-display">********</div>
-            <button class="action-btn" id="copy-btn" title="نسخ">
-                <i class="far fa-copy"></i>
-            </button>
+            <button class="action-btn" id="copy-btn"><i class="far fa-copy"></i></button>
         </div>
 
         <div class="strength-indicator">
@@ -301,29 +100,17 @@
         <div class="settings-group">
             <div>
                 <div class="label-row">
-                    <span>طول كلمة المرور</span>
+                    <span id="len-label">طول كلمة المرور</span>
                     <span id="length-val">16</span>
                 </div>
                 <input type="range" id="length-slider" min="8" max="64" value="16">
             </div>
 
-            <div class="options-grid">
-                <label class="option-item">
-                    <input type="checkbox" id="uppercase" checked>
-                    <span>أحرف كبيرة</span>
-                </label>
-                <label class="option-item">
-                    <input type="checkbox" id="lowercase" checked>
-                    <span>أحرف صغيرة</span>
-                </label>
-                <label class="option-item">
-                    <input type="checkbox" id="numbers" checked>
-                    <span>أرقام</span>
-                </label>
-                <label class="option-item">
-                    <input type="checkbox" id="symbols" checked>
-                    <span>رموز</span>
-                </label>
+            <div class="options-grid" id="options-grid">
+                <label class="option-item"><input type="checkbox" id="uppercase" checked><span id="opt-up">أحرف كبيرة</span></label>
+                <label class="option-item"><input type="checkbox" id="lowercase" checked><span id="opt-low">أحرف صغيرة</span></label>
+                <label class="option-item"><input type="checkbox" id="numbers" checked><span id="opt-num">أرقام</span></label>
+                <label class="option-item"><input type="checkbox" id="symbols" checked><span id="opt-sym">رموز</span></label>
             </div>
         </div>
 
@@ -331,82 +118,155 @@
 
         <footer>
             <div class="footer-links">
-                <a href="https://github.com/Wr-7770" target="_blank"><i class="fab fa-github"></i></a>
-                <a href="https://linkedin.com/in/yousef-mohamed-ahmed-24795435a" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Wr-7770" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
+                <a href="https://linkedin.com/in/yousef-mohamed-ahmed-24795435a" target="_blank" rel="noopener"><i class="fab fa-linkedin"></i></a>
                 <a href="mailto:nerva98134@gmail.com"><i class="far fa-envelope"></i></a>
             </div>
             <div class="footer-text">Made by Y796</div>
         </footer>
     </div>
 
-    <div id="toast" class="toast">تم النسخ للحافظة</div>
+    <div id="toast" class="toast">تم النسخ بنجاح</div>
 
     <script>
-        const display = document.getElementById('password-display' );
+        let currentLang = 'ar';
+        let currentMode = 'password';
+
+        const display = document.getElementById('password-display');
         const lengthSlider = document.getElementById('length-slider');
         const lengthVal = document.getElementById('length-val');
         const generateBtn = document.getElementById('generate-btn');
         const copyBtn = document.getElementById('copy-btn');
         const strengthBar = document.getElementById('strength-bar');
         const toast = document.getElementById('toast');
+        const langBtn = document.getElementById('lang-btn');
+        const htmlTag = document.getElementById('main-html');
+        const modePassword = document.getElementById('mode-password');
+        const modePassphrase = document.getElementById('mode-passphrase');
+        const optionsGrid = document.getElementById('options-grid');
 
-        const config = {
-            uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-            lowercase: 'abcdefghijklmnopqrstuvwxyz',
-            numbers: '0123456789',
-            symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+        const wordList = ["apple","river","mountain","freedom","shadow","crystal","thunder","silent","golden","ocean","galaxy","phoenix","midnight","eternal","horizon","luminous","serenity","infinity","brilliant","quantum"];
+
+        const i18n = {
+            ar: {
+                title: 'VaultGen',
+                subtitle: 'توليد كلمات مرور بمعايير أمنية عالمية',
+                lenLabel: 'طول كلمة المرور',
+                wordLabel: 'عدد الكلمات',
+                optUp: 'أحرف كبيرة',
+                optLow: 'أحرف صغيرة',
+                optNum: 'أرقام',
+                optSym: 'رموز',
+                btnGen: 'توليد كلمة المرور',
+                toast: 'تم النسخ بنجاح',
+                lang: 'English',
+                error: 'حدد خياراً'
+            },
+            en: {
+                title: 'VaultGen',
+                subtitle: 'Professional Grade Password Security',
+                lenLabel: 'Password Length',
+                wordLabel: 'Number of Words',
+                optUp: 'Uppercase',
+                optLow: 'Lowercase',
+                optNum: 'Numbers',
+                optSym: 'Symbols',
+                btnGen: 'Generate Password',
+                toast: 'Copied to Clipboard',
+                lang: 'العربية',
+                error: 'Select option'
+            }
         };
 
-        function generate() {
-            let chars = '';
-            if (document.getElementById('uppercase').checked) chars += config.uppercase;
-            if (document.getElementById('lowercase').checked) chars += config.lowercase;
-            if (document.getElementById('numbers').checked) chars += config.numbers;
-            if (document.getElementById('symbols').checked) chars += config.symbols;
-
-            if (!chars) {
-                display.innerText = 'حدد خياراً';
-                return;
+        function secureRandom(max) {
+            if (window.crypto && window.crypto.getRandomValues) {
+                const array = new Uint32Array(1);
+                window.crypto.getRandomValues(array);
+                return array[0] % max;
             }
+            return Math.floor(Math.random() * max);
+        }
 
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const d = i18n[currentLang];
+            htmlTag.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            htmlTag.lang = currentLang;
+            document.getElementById('title').innerText = d.title;
+            document.getElementById('subtitle').innerText = d.subtitle;
+            document.getElementById('len-label').innerText = currentMode === 'password' ? d.lenLabel : d.wordLabel;
+            document.getElementById('opt-up').innerText = d.optUp;
+            document.getElementById('opt-low').innerText = d.optLow;
+            document.getElementById('opt-num').innerText = d.optNum;
+            document.getElementById('opt-sym').innerText = d.optSym;
+            document.getElementById('generate-btn').innerText = d.btnGen;
+            document.getElementById('toast').innerText = d.toast;
+            langBtn.innerText = d.lang;
+            display.style.direction = 'ltr';
+        }
+
+        function toggleMode(mode) {
+            currentMode = mode;
+            modePassword.classList.toggle('active', mode === 'password');
+            modePassphrase.classList.toggle('active', mode === 'passphrase');
+            optionsGrid.style.display = mode === 'password' ? 'grid' : 'none';
+            document.getElementById('len-label').innerText = mode === 'password' ? i18n[currentLang].lenLabel : i18n[currentLang].wordLabel;
+            lengthSlider.min = mode === 'password' ? 8 : 3;
+            lengthSlider.max = mode === 'password' ? 64 : 8;
+            lengthSlider.value = mode === 'password' ? 16 : 5;
+            lengthVal.innerText = lengthSlider.value;
+            generate();
+        }
+
+        function generate() {
             let pwd = '';
-            const len = lengthSlider.value;
-            for (let i = 0; i < len; i++) {
-                pwd += chars.charAt(Math.floor(Math.random() * chars.length));
+            if (currentMode === 'password') {
+                let chars = '';
+                if (document.getElementById('uppercase').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                if (document.getElementById('lowercase').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
+                if (document.getElementById('numbers').checked) chars += '0123456789';
+                if (document.getElementById('symbols').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+
+                if (!chars) {
+                    display.innerText = i18n[currentLang].error;
+                    return;
+                }
+                for (let i = 0; i < lengthSlider.value; i++) {
+                    pwd += chars.charAt(secureRandom(chars.length));
+                }
+            } else {
+                for (let i = 0; i < lengthSlider.value; i++) {
+                    pwd += wordList[secureRandom(wordList.length)];
+                    if (i < lengthSlider.value - 1) pwd += '-';
+                }
             }
             display.innerText = pwd;
             updateStrength(pwd);
         }
 
         function updateStrength(pwd) {
-            let score = 0;
+            let score = currentMode === 'passphrase' ? 85 : 0;
             if (pwd.length >= 12) score += 25;
-            if (pwd.length >= 16) score += 15;
             if (/[A-Z]/.test(pwd)) score += 20;
             if (/[0-9]/.test(pwd)) score += 20;
             if (/[^A-Za-z0-9]/.test(pwd)) score += 20;
-
-            strengthBar.style.width = score + '%';
-            
-            if (score < 50) strengthBar.style.backgroundColor = '#ff4444';
-            else if (score < 80) strengthBar.style.backgroundColor = '#ffbb33';
-            else strengthBar.style.backgroundColor = '#00C851';
+            strengthBar.style.width = Math.min(score, 100) + '%';
+            strengthBar.style.backgroundColor = score > 80 ? '#00C851' : score > 50 ? '#ffbb33' : '#ff4444';
         }
 
-        lengthSlider.addEventListener('input', (e) => {
-            lengthVal.innerText = e.target.value;
-            generate();
-        });
-
+        // Events
+        lengthSlider.addEventListener('input', () => { lengthVal.innerText = lengthSlider.value; generate(); });
         generateBtn.addEventListener('click', generate);
+        langBtn.addEventListener('click', toggleLanguage);
+        modePassword.addEventListener('click', () => toggleMode('password'));
+        modePassphrase.addEventListener('click', () => toggleMode('passphrase'));
 
         copyBtn.addEventListener('click', () => {
             const pwd = display.innerText;
-            if (pwd === '********' || pwd === 'حدد خياراً') return;
-            
+            if (pwd.length < 4) return;
             navigator.clipboard.writeText(pwd).then(() => {
                 toast.style.display = 'block';
-                setTimeout(() => { toast.style.display = 'none'; }, 2000);
+                setTimeout(() => toast.style.display = 'none', 2000);
             });
         });
 
@@ -414,4 +274,3 @@
     </script>
 </body>
 </html>
- 
