@@ -1,14 +1,24 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl" id="main-html">
 <head>
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-6SW5TPXQ59"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag( ){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="VaultGen - Professional Grade Password Security by Y796. Secure, fast, and private.">
+    <title>VaultGen | Professional Password Security</title>
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6SW5TPXQ59"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag( ){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6SW5TPXQ59');
+    </script>
 
-  gtag('config', 'G-6SW5TPXQ59');
-</script>
     <style>
         :root {
             --bg-color: #0a0a0a;
@@ -23,51 +33,57 @@
         body { background-color: var(--bg-color); color: var(--text-primary); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; font-family: 'Inter', 'Tajawal', sans-serif; }
         .container { width: 100%; max-width: 500px; background: var(--card-bg); border: 1px solid var(--border-color); border-radius: 20px; padding: 40px; box-shadow: 0 25px 50px rgba(0,0,0,0.7); position: relative; }
         
-        .lang-switch { position: absolute; top: 20px; right: 20px; background: #1a1a1a; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 6px 16px; border-radius: 20px; cursor: pointer; font-size: 0.85rem; font-weight: 600; z-index: 10; }
+        .top-controls { position: absolute; top: 20px; left: 20px; right: 20px; display: flex; justify-content: space-between; align-items: center; }
+        .lang-switch { background: #1a1a1a; border: 1px solid var(--border-color); color: var(--text-secondary); padding: 5px 15px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; font-weight: 600; }
         .lang-switch:hover { color: #fff; border-color: #444; }
 
-        header { text-align: center; margin-bottom: 35px; }
+        header { text-align: center; margin-bottom: 30px; margin-top: 10px; }
         h1 { font-size: 2.2rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 8px; }
-        p.subtitle { color: var(--text-secondary); font-size: 0.95rem; }
+        p.subtitle { color: var(--text-secondary); font-size: 0.9rem; }
 
-        .mode-selector { display: flex; background: #1a1a1a; border: 1px solid var(--border-color); border-radius: 12px; padding: 5px; margin-bottom: 30px; }
-        .mode-btn { flex: 1; padding: 12px; border: none; background: none; color: var(--text-secondary); cursor: pointer; font-weight: 600; border-radius: 8px; }
-        .mode-btn.active { background: #fff; color: #000; }
+        /* تبديل الوضع (Password / Passphrase) */
+        .mode-selector { display: flex; background: #000; border: 1px solid var(--border-color); border-radius: 10px; margin-bottom: 25px; padding: 4px; }
+        .mode-btn { flex: 1; padding: 10px; border: none; background: none; color: var(--text-secondary); cursor: pointer; font-size: 0.85rem; font-weight: 600; border-radius: 6px; }
+        .mode-btn.active { background: #1a1a1a; color: #fff; }
 
         .result-box { background: #000; border: 1px solid var(--border-color); border-radius: 12px; padding: 22px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 20px; }
-        #password-display { font-family: 'Courier New', monospace; font-size: 1.4rem; color: var(--text-primary); word-break: break-all; direction: ltr !important; text-align: left; flex: 1; }
-
-        .action-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.45rem; }
+        #password-display { font-family: 'Courier New', monospace; font-size: 1.3rem; color: var(--text-primary); word-break: break-all; direction: ltr !important; text-align: left; flex: 1; }
+        .action-btn { background: none; border: none; color: var(--text-secondary); cursor: pointer; font-size: 1.4rem; padding: 5px; margin-right: 10px; }
         .action-btn:hover { color: #fff; }
 
-        .strength-indicator { height: 5px; width: 100%; background: #262626; border-radius: 3px; margin-bottom: 35px; overflow: hidden; }
+        .strength-indicator { height: 5px; width: 100%; background: #262626; border-radius: 3px; margin-bottom: 30px; overflow: hidden; }
         #strength-bar { height: 100%; width: 0%; transition: width 0.5s ease, background-color 0.5s ease; }
 
-        .settings-group { display: flex; flex-direction: column; gap: 30px; }
-        .label-row { display: flex; justify-content: space-between; margin-bottom: 15px; font-size: 1rem; color: var(--text-secondary); }
+        .settings-group { display: flex; flex-direction: column; gap: 25px; }
+        .label-row { display: flex; justify-content: space-between; margin-bottom: 12px; font-size: 0.95rem; color: var(--text-secondary); }
         
         input[type="range"] { -webkit-appearance: none; width: 100%; height: 6px; background: #262626; border-radius: 3px; outline: none; }
         input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; background: #fff; border-radius: 50%; cursor: pointer; border: 3px solid #000; }
 
-        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
-        .option-item { display: flex; align-items: center; gap: 12px; padding: 15px; background: #1a1a1a; border: 1px solid var(--border-color); border-radius: 12px; cursor: pointer; font-size: 0.9rem; }
+        .options-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        .option-item { display: flex; align-items: center; gap: 10px; padding: 14px; background: #1a1a1a; border: 1px solid var(--border-color); border-radius: 10px; cursor: pointer; font-size: 0.85rem; }
+        .option-item input { appearance: none; width: 18px; height: 18px; border: 2px solid #444; border-radius: 4px; cursor: pointer; position: relative; }
+        .option-item input:checked { background: #fff; border-color: #fff; }
+        .option-item input:checked::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: #000; font-size: 10px; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); }
 
-        .generate-btn { width: 100%; padding: 20px; background: #fff; color: #000; border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-top: 35px; }
+        .generate-btn { width: 100%; padding: 18px; background: #fff; color: #000; border: none; border-radius: 12px; font-weight: 800; font-size: 1.1rem; cursor: pointer; margin-top: 30px; }
         .generate-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 20px rgba(255,255,255,0.1); }
 
-        footer { margin-top: 45px; padding-top: 25px; border-top: 1px solid var(--border-color); text-align: center; }
+        footer { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); text-align: center; }
         .footer-links { display: flex; justify-content: center; gap: 30px; margin-bottom: 15px; }
-        .footer-links a { color: var(--text-secondary); font-size: 1.5rem; }
+        .footer-links a { color: var(--text-secondary); font-size: 1.4rem; }
         .footer-links a:hover { color: #fff; }
-        .footer-text { font-size: 0.85rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 3px; }
+        .footer-text { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 2px; }
 
-        .toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 12px 30px; border-radius: 10px; font-size: 0.95rem; font-weight: 700; display: none; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%); background: #fff; color: #000; padding: 12px 30px; border-radius: 10px; font-size: 0.9rem; font-weight: 700; display: none; z-index: 1000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <button class="lang-switch" id="lang-btn">English</button>
+        <div class="top-controls">
+            <button class="lang-switch" id="lang-btn">English</button>
+        </div>
         
         <header>
             <h1 id="title">VaultGen</h1>
@@ -75,13 +91,15 @@
         </header>
 
         <div class="mode-selector">
-            <button class="mode-btn active" id="mode-password">Password</button>
-            <button class="mode-btn" id="mode-passphrase">Passphrase</button>
+            <button class="mode-btn active" id="mode-pass">Password</button>
+            <button class="mode-btn" id="mode-phrase">Passphrase</button>
         </div>
 
         <div class="result-box">
             <div id="password-display">********</div>
-            <button class="action-btn" id="copy-btn"><i class="far fa-copy"></i></button>
+            <button class="action-btn" id="copy-btn">
+                <i class="far fa-copy"></i>
+            </button>
         </div>
 
         <div class="strength-indicator">
@@ -89,7 +107,7 @@
         </div>
 
         <div class="settings-group">
-            <div>
+            <div id="length-container">
                 <div class="label-row">
                     <span id="len-label">طول كلمة المرور</span>
                     <span id="length-val">16</span>
@@ -97,7 +115,7 @@
                 <input type="range" id="length-slider" min="8" max="64" value="16">
             </div>
 
-            <div class="options-grid" id="options-grid">
+            <div class="options-grid" id="options-container">
                 <label class="option-item"><input type="checkbox" id="uppercase" checked><span id="opt-up">أحرف كبيرة</span></label>
                 <label class="option-item"><input type="checkbox" id="lowercase" checked><span id="opt-low">أحرف صغيرة</span></label>
                 <label class="option-item"><input type="checkbox" id="numbers" checked><span id="opt-num">أرقام</span></label>
@@ -120,10 +138,7 @@
     <div id="toast" class="toast">تم النسخ بنجاح</div>
 
     <script>
-        let currentLang = 'ar';
-        let currentMode = 'password';
-
-        const display = document.getElementById('password-display');
+        const display = document.getElementById('password-display' );
         const lengthSlider = document.getElementById('length-slider');
         const lengthVal = document.getElementById('length-val');
         const generateBtn = document.getElementById('generate-btn');
@@ -132,11 +147,11 @@
         const toast = document.getElementById('toast');
         const langBtn = document.getElementById('lang-btn');
         const htmlTag = document.getElementById('main-html');
-        const modePassword = document.getElementById('mode-password');
-        const modePassphrase = document.getElementById('mode-passphrase');
-        const optionsGrid = document.getElementById('options-grid');
+        const modePass = document.getElementById('mode-pass');
+        const modePhrase = document.getElementById('mode-phrase');
 
-        const wordList = ["apple","river","mountain","freedom","shadow","crystal","thunder","silent","golden","ocean","galaxy","phoenix","midnight","eternal","horizon","luminous","serenity","infinity","brilliant","quantum"];
+        let currentLang = 'ar';
+        let currentMode = 'password';
 
         const i18n = {
             ar: {
@@ -169,6 +184,43 @@
             }
         };
 
+        const wordList = ["apple", "secure", "vault", "cloud", "pixel", "storm", "ocean", "guard", "cipher", "matrix", "shield", "alpha", "omega", "delta", "focus", "logic", "nexus", "smart", "quick", "bright", "hidden", "stable", "prime", "sonic", "vivid"];
+
+        function toggleMode(mode) {
+            currentMode = mode;
+            modePass.classList.toggle('active', mode === 'password');
+            modePhrase.classList.toggle('active', mode === 'passphrase');
+            
+            const isPass = mode === 'password';
+            document.getElementById('options-container').style.display = isPass ? 'grid' : 'none';
+            document.getElementById('len-label').innerText = isPass ? i18n[currentLang].lenLabel : i18n[currentLang].wordLabel;
+            
+            lengthSlider.min = isPass ? 8 : 3;
+            lengthSlider.max = isPass ? 64 : 10;
+            lengthSlider.value = isPass ? 16 : 4;
+            lengthVal.innerText = lengthSlider.value;
+            
+            generate();
+        }
+
+        function toggleLanguage() {
+            currentLang = currentLang === 'ar' ? 'en' : 'ar';
+            const langData = i18n[currentLang];
+            htmlTag.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
+            htmlTag.lang = currentLang;
+            document.getElementById('title').innerText = langData.title;
+            document.getElementById('subtitle').innerText = langData.subtitle;
+            document.getElementById('len-label').innerText = currentMode === 'password' ? langData.lenLabel : langData.wordLabel;
+            document.getElementById('opt-up').innerText = langData.optUp;
+            document.getElementById('opt-low').innerText = langData.optLow;
+            document.getElementById('opt-num').innerText = langData.optNum;
+            document.getElementById('opt-sym').innerText = langData.optSym;
+            document.getElementById('generate-btn').innerText = langData.btnGen;
+            document.getElementById('toast').innerText = langData.toast;
+            langBtn.innerText = langData.lang;
+            display.style.direction = 'ltr';
+        }
+
         function secureRandom(max) {
             if (window.crypto && window.crypto.getRandomValues) {
                 const array = new Uint32Array(1);
@@ -178,86 +230,61 @@
             return Math.floor(Math.random() * max);
         }
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'ar' ? 'en' : 'ar';
-            const d = i18n[currentLang];
-            htmlTag.dir = currentLang === 'ar' ? 'rtl' : 'ltr';
-            htmlTag.lang = currentLang;
-            document.getElementById('title').innerText = d.title;
-            document.getElementById('subtitle').innerText = d.subtitle;
-            document.getElementById('len-label').innerText = currentMode === 'password' ? d.lenLabel : d.wordLabel;
-            document.getElementById('opt-up').innerText = d.optUp;
-            document.getElementById('opt-low').innerText = d.optLow;
-            document.getElementById('opt-num').innerText = d.optNum;
-            document.getElementById('opt-sym').innerText = d.optSym;
-            document.getElementById('generate-btn').innerText = d.btnGen;
-            document.getElementById('toast').innerText = d.toast;
-            langBtn.innerText = d.lang;
-            display.style.direction = 'ltr';
-        }
-
-        function toggleMode(mode) {
-            currentMode = mode;
-            modePassword.classList.toggle('active', mode === 'password');
-            modePassphrase.classList.toggle('active', mode === 'passphrase');
-            optionsGrid.style.display = mode === 'password' ? 'grid' : 'none';
-            document.getElementById('len-label').innerText = mode === 'password' ? i18n[currentLang].lenLabel : i18n[currentLang].wordLabel;
-            lengthSlider.min = mode === 'password' ? 8 : 3;
-            lengthSlider.max = mode === 'password' ? 64 : 8;
-            lengthSlider.value = mode === 'password' ? 16 : 5;
-            lengthVal.innerText = lengthSlider.value;
-            generate();
-        }
-
         function generate() {
-            let pwd = '';
             if (currentMode === 'password') {
+                const config = {
+                    uppercase: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+                    lowercase: 'abcdefghijklmnopqrstuvwxyz',
+                    numbers: '0123456789',
+                    symbols: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+                };
                 let chars = '';
-                if (document.getElementById('uppercase').checked) chars += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-                if (document.getElementById('lowercase').checked) chars += 'abcdefghijklmnopqrstuvwxyz';
-                if (document.getElementById('numbers').checked) chars += '0123456789';
-                if (document.getElementById('symbols').checked) chars += '!@#$%^&*()_+-=[]{}|;:,.<>?';
+                if (document.getElementById('uppercase').checked) chars += config.uppercase;
+                if (document.getElementById('lowercase').checked) chars += config.lowercase;
+                if (document.getElementById('numbers').checked) chars += config.numbers;
+                if (document.getElementById('symbols').checked) chars += config.symbols;
 
-                if (!chars) {
-                    display.innerText = i18n[currentLang].error;
-                    return;
-                }
+                if (!chars) { display.innerText = i18n[currentLang].error; return; }
+                let pwd = '';
                 for (let i = 0; i < lengthSlider.value; i++) {
                     pwd += chars.charAt(secureRandom(chars.length));
                 }
+                display.innerText = pwd;
             } else {
+                let phrase = [];
                 for (let i = 0; i < lengthSlider.value; i++) {
-                    pwd += wordList[secureRandom(wordList.length)];
-                    if (i < lengthSlider.value - 1) pwd += '-';
+                    phrase.push(wordList[secureRandom(wordList.length)]);
                 }
+                display.innerText = phrase.join('-');
             }
-            display.innerText = pwd;
-            updateStrength(pwd);
+            updateStrength(display.innerText);
         }
 
         function updateStrength(pwd) {
-            let score = currentMode === 'passphrase' ? 85 : 0;
-            if (pwd.length >= 12) score += 25;
-            if (/[A-Z]/.test(pwd)) score += 20;
-            if (/[0-9]/.test(pwd)) score += 20;
-            if (/[^A-Za-z0-9]/.test(pwd)) score += 20;
+            let score = 0;
+            if (pwd.length >= 12) score += 30;
+            if (pwd.includes('-')) score += 40; // Passphrases are strong
+            if (/[A-Z]/.test(pwd)) score += 15;
+            if (/[0-9]/.test(pwd)) score += 15;
+            if (/[^A-Za-z0-9]/.test(pwd)) score += 10;
             strengthBar.style.width = Math.min(score, 100) + '%';
-            strengthBar.style.backgroundColor = score > 80 ? '#00C851' : score > 50 ? '#ffbb33' : '#ff4444';
+            if (score < 50) strengthBar.style.backgroundColor = '#ff4444';
+            else if (score < 80) strengthBar.style.backgroundColor = '#ffbb33';
+            else strengthBar.style.backgroundColor = '#00C851';
         }
 
-        // Events
-        lengthSlider.addEventListener('input', () => { lengthVal.innerText = lengthSlider.value; generate(); });
+        lengthSlider.addEventListener('input', (e) => { lengthVal.innerText = e.target.value; generate(); });
         generateBtn.addEventListener('click', generate);
         langBtn.addEventListener('click', toggleLanguage);
-        modePassword.addEventListener('click', () => toggleMode('password'));
-        modePassphrase.addEventListener('click', () => toggleMode('passphrase'));
+        modePass.addEventListener('click', () => toggleMode('password'));
+        modePhrase.addEventListener('click', () => toggleMode('passphrase'));
 
         copyBtn.addEventListener('click', () => {
             const pwd = display.innerText;
-            if (pwd.length < 4) return;
+            if (pwd === '********' || pwd === i18n[currentLang].error) return;
             navigator.clipboard.writeText(pwd).then(() => {
                 toast.style.display = 'block';
-                setTimeout(() => toast.style.display = 'none', 2000);
+                setTimeout(() => { toast.style.display = 'none'; }, 2000);
             });
         });
 
